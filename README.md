@@ -40,7 +40,7 @@ plt.show()
 ```
 
 This example may be fine for some use-cases but the RawFile class only provides limited access to all the functionalities and can serve as an example how to use the module wihtin a project.
-For an example that uses more of the modules capabilites have a look at [raw_file_reader_examle.py](https://github.com/ethz-institute-of-microbiology/fisher_py/blob/main/fisher_py/examples/raw_file_reader_example.py).
+For an example that uses more of the modules capabilites have a look at [raw_file_reader_examle.py](https://github.com/ethz-institute-of-microbiology/fisher_py/blob/main/examples/raw_file_reader_example.py).
 
 ## License and copyright
 fisher_py (Copyright 2021 ethz-institute-of-microbiology) is licensed under the  MIT license.

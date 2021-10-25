@@ -1,0 +1,14 @@
+name: Create file
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create file
+      run: |
+        printf "Hello\nWorld\n" > hw.txt
