@@ -29,3 +29,7 @@ jobs:
       - name: Run a one-line script
         run: |
           printf "Hello\nWorld\n" > hw.txt
+      - name: Display version and setup.py
+        run: |
+          cat hw.txt
+          cat setup.py
