@@ -26,10 +26,9 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Set version number
         run: |
-          printf "Hello\nWorld\n" > hw.txt
+          sed -i "s/    version='0.0.1.dev1'/    version='1.0.${{github.run_number}}'/" setup.py
       - name: Display version and setup.py
         run: |
-          cat hw.txt
           cat setup.py
