@@ -1,1 +1,1 @@
-recursive-include fisher_py/lib *
+recursive-include fisher_py/dll *
