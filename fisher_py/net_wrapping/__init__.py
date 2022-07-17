@@ -2,6 +2,12 @@ import clr
 import os
 from fisher_py.net_wrapping.net_wrapper_base import NetWrapperBase
 
+# codecs for implicit enum conversion
+import Python.Runtime
+
+Python.Runtime.PyObjectConversions.RegisterEncoder(Python.Runtime.Codecs.EnumPyIntCodec.Instance)
+Python.Runtime.PyObjectConversions.RegisterDecoder(Python.Runtime.Codecs.EnumPyIntCodec.Instance)
+
 
 # access .net standard dlls
 dll_path = os.path.join(os.path.split(__file__)[0], '..', 'dll')
