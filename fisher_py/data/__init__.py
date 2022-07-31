@@ -1,5 +1,8 @@
 from fisher_py.data.ft_average_options import FtAverageOptions
 from fisher_py.data.raw_file_classification import RawFileClassification
+from fisher_py.data.tray_shape import TrayShape
+from fisher_py.data.error_log_entry import ErrorLogEntry
+from fisher_py.data.auto_sampler_information import AutoSamplerInformation
 from fisher_py.data.file_type import FileType
 from fisher_py.data.file_header import FileHeader
 from fisher_py.data.source_fragmentation_info_valid_type import SourceFragmentationInfoValidType
@@ -14,3 +17,4 @@ from fisher_py.data.file_error import FileError
 from fisher_py.data.sequence_info import SequenceInfo
 from fisher_py.data.sequence_file_writer import SequenceFileWriter
 from fisher_py.data.scan_event import ScanEvent
+from fisher_py.data.scan_events import ScanEvents

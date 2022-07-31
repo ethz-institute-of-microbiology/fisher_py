@@ -139,6 +139,13 @@ class WrappedRunHeader(NetWrapperBase):
         Gets the count of tune data entries
         """
         return self._get_wrapped_object_().TuneDataCount
+    
+    @property
+    def error_log_count(self) -> int:
+        """
+        Gets the count of status log entries
+        """
+        return self._get_wrapped_object_().ErrorLogCount
 
     @property
     def status_log_count(self) -> int:
