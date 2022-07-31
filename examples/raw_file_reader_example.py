@@ -415,7 +415,7 @@ if __name__ == '__main__':
 
     try:
         # Check to see if the RAW file name was supplied as an argument to the program
-        filename = ''
+        filename = 'my_file.raw'
 
         args = sys.argv[1:]
         if len(args) > 0:

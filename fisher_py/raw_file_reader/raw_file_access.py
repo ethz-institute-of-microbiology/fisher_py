@@ -1,5 +1,6 @@
 from __future__ import annotations
-from typing import List
+from typing import List, Tuple
+from fisher_py.data.auto_sampler_information import AutoSamplerInformation
 from fisher_py.raw_file_reader import ScanDependents
 from fisher_py.utils import is_number, to_net_list
 from fisher_py.data.business import (
@@ -9,7 +10,9 @@ from fisher_py.data.business import (
 )
 from fisher_py.data.business.chromatogram_signal import ChromatogramData
 from fisher_py.raw_file_reader.data_model import WrappedRunHeader
-from fisher_py.data import Device, ScanFilter, ScanEvent, FtAverageOptions
+from fisher_py.data import (
+    Device, ScanFilter, ScanEvent, FtAverageOptions, FileError, FileHeader, ScanEvents, ErrorLogEntry
+)
 from fisher_py.net_wrapping import NetWrapperBase, ThermoFisher
 from fisher_py.exceptions import RawFileException
 from datetime import datetime
@@ -42,6 +45,33 @@ class RawFileAccess(NetWrapperBase):
             raise RawFileException(f'Raw file import failed. {e}')
 
     # properties
+    
+    @property
+    def auto_sampler_information(self) -> AutoSamplerInformation:
+        """
+        Gets the auto sampler (tray) information.
+        """
+        wrapped_object = self._get_wrapped_object_()
+        if hasattr(wrapped_object, 'AutoSamplerInformation'):
+            return AutoSamplerInformation._get_wrapper_(wrapped_object.AutoSamplerInformation)
+        return None
+    
+    @property
+    def computer_name(self) -> str:
+        """
+        Gets the name of the computer, used to create this file.
+        """
+        return self._get_wrapped_object_().ComputerName
+    
+    @property
+    def user_label(self) -> List[str]:
+        """
+        Gets the user labels of this raw file.
+        """
+        wrapped_object = self._get_wrapped_object_()
+        if hasattr(wrapped_object, 'UserLabel'):
+            return tuple(wrapped_object.UserLabel)
+        return None
 
     @property
     def include_reference_and_exception_data(self) -> bool:
@@ -163,6 +193,26 @@ class RawFileAccess(NetWrapperBase):
         Gets the name of person creating data.
         """
         return self._get_wrapped_object_().CreatorId
+    
+    @property
+    def file_error(self) -> FileError:
+        """
+        Gets the file error state.
+        """
+        wrapped_object = self._get_wrapped_object_()
+        if hasattr(wrapped_object, 'FileError'):
+            return FileError._get_wrapper_(wrapped_object.FileError)
+        return None
+    
+    @property
+    def file_header(self) -> FileHeader:
+        """
+        Gets the raw file header.
+        """
+        wrapped_object = self._get_wrapped_object_()
+        if hasattr(wrapped_object, 'FileHeader'):
+            return FileHeader._get_wrapper_(wrapped_object.FileHeader)
+        return None
 
     @property
     def is_open(self) -> bool:
@@ -170,7 +220,41 @@ class RawFileAccess(NetWrapperBase):
         Gets a value indicating whether the data file was successfully opened.
         """
         return self._get_wrapped_object_().IsOpen
-
+    
+    @property
+    def has_instrument_method(self) -> bool:
+        """
+        Gets a value indicating whether this file has an instrument method.
+        """
+        return self._get_wrapped_object_().HasInstrumentMethod
+    
+    @property
+    def has_ms_data(self) -> bool:
+        """
+        Gets a value indicating whether this file has MS data.
+        """
+        return self._get_wrapped_object_().HasMsData
+    
+    @property
+    def scan_events(self) -> ScanEvents:
+        """
+        Gets the scan events. This is the set of events which have been programmed in
+        advance of collecting data (based on the MS method). This does not analyze any
+        scan data.
+        """
+        return ScanEvents._get_wrapper_(self._get_wrapped_object_().ScanEvents)
+    
+    @property
+    def status_log_plottable_data(self) -> List[Tuple[str, int]]:
+        """
+        Gets the labels and index positions of the status log items which may be plotted.
+        That is, the numeric items. Index is a zero based index into the log record (the
+        array returned by GetStatusLogHeaderInformation) Labels names are returned by
+        "Key" and the index into the log record is "Value".
+        """
+        kv_list = self._get_wrapped_object_().StatusLogPlottableData
+        return tuple((kv.Key, kv.Value) for kv in kv_list)        
+    
     def get_scan_events(self, first_scan_number: int, last_scan_number: int) -> List[ScanEvent]:
         """
         Summary:
@@ -916,6 +1000,22 @@ class RawFileAccess(NetWrapperBase):
             average_options = average_options._get_wrapped_object_()
         scans = to_net_list(scans, int)
         return Scan._get_wrapper_(ThermoFisher.CommonCore.Data.Extensions.AverageScans(self._get_wrapped_object_(), scans, options, average_options, always_merge_segments))
+    
+    def get_error_log_item(self, index: int) -> ErrorLogEntry:
+        """
+        Summary:
+            Gets an entry from the instrument error log.
+        
+        Parameters:
+            index:
+                Zero based index. The number of records available is RunHeaderEx.ErrorLogCount
+        
+        Returns:
+            An interface to read a specific log entry
+        """
+        assert type(index) is int
+        net_entry = self._get_wrapped_object_().GetErrorLogItem(index)
+        return ErrorLogEntry._get_wrapper_(net_entry) if net_entry else None
 
     def __enter__(self) -> RawFileAccess:
         return self

@@ -9,6 +9,7 @@ class FileType(enum.Enum):
     ExperimentMethod = 1
     SampleList = 2
     ProcessingMethod = 4
+    RawFile = 8
     TuneMethod = 16
     ResultsFile = 32
     QuanFile = 64
