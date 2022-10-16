@@ -269,7 +269,7 @@ def get_average_spectrum(raw_file: RawFileAccess, first_scan_number: int, last_s
         # Print the spectral data (mass, intensity values)
         if output_data:
             for i in range(average_scan.centroid_scan.length):
-                print(f'  {average_scan.centroid_scan.masses[0]} {average_scan.centroid_scan.intensities[i]}')
+                print(f'  {average_scan.centroid_scan.masses[i]} {average_scan.centroid_scan.intensities[i]}')
 
     # This example uses a different method to get the same average spectrum that was calculated in the
     # previous portion of this method.  Instead of passing the start and end scan, a list of scans will
@@ -283,7 +283,7 @@ def get_average_spectrum(raw_file: RawFileAccess, first_scan_number: int, last_s
         # Print the spectral data (mass, intensity values)
         if output_data:
             for i in range(average_scan.centroid_scan.length):
-                print(f'  {average_scan.centroid_scan.masses[0]} {average_scan.centroid_scan.intensities[i]}')
+                print(f'  {average_scan.centroid_scan.masses[i]} {average_scan.centroid_scan.intensities[i]}')
     print('')
 
 
