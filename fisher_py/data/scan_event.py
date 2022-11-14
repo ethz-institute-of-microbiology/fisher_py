@@ -293,7 +293,7 @@ class ScanEvent(NetWrapperBase):
         Value:
         See ThermoFisher.CommonCore.Data.FilterEnums.MSOrderType for possible values
         """
-        return MsOrderType(self._get_wrapped_object_().MsOrder)
+        return MsOrderType(self._get_wrapped_object_().MSOrder)
 
     @property
     def dependent(self) -> TriState:
