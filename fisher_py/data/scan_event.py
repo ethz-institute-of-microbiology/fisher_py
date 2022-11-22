@@ -293,7 +293,7 @@ class ScanEvent(NetWrapperBase):
         Value:
         See ThermoFisher.CommonCore.Data.FilterEnums.MSOrderType for possible values
         """
-        return MsOrderType(self._get_wrapped_object_().MsOrder)
+        return MsOrderType(self._get_wrapped_object_().MSOrder)
 
     @property
     def dependent(self) -> TriState:
@@ -596,7 +596,7 @@ class ScanEvent(NetWrapperBase):
         Returns:
         reaction details
         """
-        return Reaction(self._get_wrapped_object_().Reactions[index])
+        return Reaction(self._get_wrapped_object_().GetReaction(index))
 
     def get_source_fragmentation_info(self, index: int) -> float:
         """
