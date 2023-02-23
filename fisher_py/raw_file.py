@@ -146,8 +146,10 @@ class RawFile(object):
             intensities = np.array(spectrum.intensities)
             charges = np.array(spectrum.charges)
         else:
-            spectrum = self._raw_file_access.get_segmented_scan_from_scan_number(scan_number, None)
-            positions = np.array(spectrum.masses)
+            stats = self._raw_file_access.get_scan_stats_for_scan_number(scan_number)
+            spectrum = self._raw_file_access.get_segmented_scan_from_scan_number(scan_number, stats)
+            mass_ranges = np.array(spectrum.mass_ranges)
+            positions = np.array(spectrum.positions)
             intensities = np.array(spectrum.intensities)
             charges = np.zeros(positions.shape)
         return positions, intensities, charges
