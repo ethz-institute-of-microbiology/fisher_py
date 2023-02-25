@@ -17,6 +17,7 @@ from fisher_py.net_wrapping import NetWrapperBase, ThermoFisher
 from fisher_py.exceptions import RawFileException
 from datetime import datetime
 import os
+import System
 
 
 class RawFileAccess(NetWrapperBase):
@@ -116,7 +117,13 @@ class RawFileAccess(NetWrapperBase):
         Gets the number of instruments which have saved method data, within the instrument
         method embedded in this file.
         """
-        return self._get_wrapped_object_().InstrumentMethodsCount
+        #TODO: This call fails on POSIX systems but not on Windows.
+        # Once new DLLs are available that fix the problem, this
+        # try-block can be removed.
+        try:
+            return self._get_wrapped_object_().InstrumentMethodsCount
+        except System.NullReferenceException:
+            return None
 
     @property
     def path(self) -> str:
@@ -307,8 +314,14 @@ class RawFileAccess(NetWrapperBase):
         
         Returns:
         The instrument names.
-        """
-        return self._get_wrapped_object_().GetAllInstrumentNamesFromInstrumentMethod()
+        """        
+        #TODO: This call fails on POSIX systems but not on Windows.
+        # Once new DLLs are available that fix the problem, this
+        # try-block can be removed.
+        try:
+            return self._get_wrapped_object_().GetAllInstrumentNamesFromInstrumentMethod()
+        except System.NullReferenceException:
+            return None
 
     def get_auto_filters(self) -> List[str]:
         """
@@ -479,7 +492,14 @@ class RawFileAccess(NetWrapperBase):
         "string.IsNullOrEmpty" on the returned value.
         """
         assert type(index) is int
-        return self._get_wrapped_object_().GetInstrumentMethod(index)
+        
+        #TODO: This call fails on POSIX systems but not on Windows.
+        # Once new DLLs are available that fix the problem, this
+        # try-block can be removed.
+        try:
+            return self._get_wrapped_object_().GetInstrumentMethod(index)
+        except System.NullReferenceException:
+            return None
 
     def get_instrument_type(self, index: int) -> Device:
         """
