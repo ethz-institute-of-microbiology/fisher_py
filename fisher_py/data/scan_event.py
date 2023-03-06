@@ -392,7 +392,7 @@ class ScanEvent(NetWrapperBase):
         Value:
         See ThermoFisher.CommonCore.Data.FilterEnums.MassAnalyzerType for possible values
         """
-        return MassAnalyzerType(self._get_wrapped_object_().MassAnalyzerType)
+        return MassAnalyzerType(self._get_wrapped_object_().MassAnalyzer)
 
     @property
     def turbo_scan(self) -> TriState:
