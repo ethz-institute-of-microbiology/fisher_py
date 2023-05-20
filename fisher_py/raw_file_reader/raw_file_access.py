@@ -25,16 +25,20 @@ class RawFileAccess(NetWrapperBase):
     Enables access to raw files
     """
 
-    def __init__(self, file_path: str):
+    def __init__(self, file_path: str=None):
         """
         Create raw file access for given file path
 
         :param file_path: Path to the raw file
         """
         super().__init__()
+
         self._run_header = None
         self._instrument_selection = None
         self._sample_information = None
+
+        if file_path is None:
+            return
 
         if not os.path.isfile(file_path):
             raise FileNotFoundError(f'No raw file with path "{file_path}" found.')
