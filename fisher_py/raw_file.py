@@ -94,7 +94,7 @@ class RawFile(object):
             scan_numbers.append(scan_number)
             retention_times.append(rt)
 
-        return scan_numbers, retention_times
+        return np.array(scan_numbers), np.array(retention_times)
 
     def _get_ms2_scan_numbers_and_masses_(self) -> Tuple[List[float], List[float]]:
         first_scan = self.first_scan
@@ -113,7 +113,7 @@ class RawFile(object):
             scan_numbers.append(scan_number)
             filter_mass_values.append(precursor_mass)
 
-        return scan_numbers, filter_mass_values
+        return np.array(scan_numbers), np.array(filter_mass_values)
 
 
     def _get_ms_scan_numbers_and_retention_times_(self, ms_order: MsOrderType) -> Tuple[List[int], List[float]]:
