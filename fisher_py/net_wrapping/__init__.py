@@ -22,7 +22,10 @@ clr.AddReference(os.path.join(dll_path, 'ThermoFisher.CommonCore.Data.dll'))
 clr.AddReference(os.path.join(dll_path, 'ThermoFisher.CommonCore.RawFileReader.dll'))
 clr.AddReference(os.path.join(dll_path, 'ThermoFisher.CommonCore.MassPrecisionEstimator.dll'))
 clr.AddReference(os.path.join(dll_path, 'ThermoFisher.CommonCore.BackgroundSubtraction.dll'))
-clr.AddReference(os.path.join(dll_path, 'OpenMcdf.dll'))
+try:
+    clr.AddReference(os.path.join(dll_path, 'OpenMcdf.dll'))
+except Exception as e:
+    print('OpenMcdf.dll already loaded??')
 
 # import .net standard libaries
 import ThermoFisher.CommonCore.Data as thermo_fisher_data
