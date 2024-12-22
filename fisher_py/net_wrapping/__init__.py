@@ -25,7 +25,7 @@ clr.AddReference(os.path.join(dll_path, 'ThermoFisher.CommonCore.BackgroundSubtr
 try:
     clr.AddReference(os.path.join(dll_path, 'OpenMcdf.dll'))
 except Exception as e:
-    print('OpenMcdf.dll already loaded??')
+    pass  # avoid duplicate load
 
 # import .net standard libaries
 import ThermoFisher.CommonCore.Data as thermo_fisher_data
