@@ -7,8 +7,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  #pull_request:
+  #  branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,8 +24,26 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      # setup python environment
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.12
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
+      # Update package number based on Github run number (maybe needs to be change once minor version is updated)
+      - name: Set version number
         run: |
-          printf "Hello\nWorld\n" > hw.txt
+          sed -i "s/2.0.0.dev1/2.0.${{github.run_number}}/" pyproject.toml
+      
+      - name: Install pypa/build
+        run: |
+          python -m pip install build --user
+      - name: Build a binary wheel and a source tarball
+        run: |
+          python -m build
+
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
