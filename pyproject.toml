@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fisher_py"
+version = "2.0.0.dev1"
+authors = [
+    { name="Dominik Werner", email="dominik.werner@live.com" }
+]
+description = "This python module allows to extract data from the RAW-file-format produces by devices from Thermo Fisher Scientific."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pythonnet>=2.5.1",
+    "numpy>=1.17.0"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/ethz-institute-of-microbiology/fisher_py"
+Issues = "https://github.com/ethz-institute-of-microbiology/fisher_py/issues"
