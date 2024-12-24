@@ -1,8 +1,9 @@
 from __future__ import annotations
 from typing import List, Tuple
 from fisher_py.data.auto_sampler_information import AutoSamplerInformation
+from fisher_py.exceptions.raw_file_exception import NoSelectedDeviceException, NoSelectedMsDeviceException
 from fisher_py.raw_file_reader import ScanDependents
-from fisher_py.utils import is_number, to_net_list
+from fisher_py.utils import datetime_net_to_py, is_number, to_net_list
 from fisher_py.data.business import (
     RunHeader, InstrumentSelection, SampleInformation, CentroidStream, ChromatogramTraceSettings,
     MassOptions, InstrumentData, ScanStatistics, SegmentedScan, LogEntry, HeaderItem, StatusLogValues,
@@ -48,6 +49,10 @@ class RawFileAccess(NetWrapperBase):
             self._wrapped_object = ThermoFisher.CommonCore.RawFileReader.RawFileReaderAdapter.FileFactory(file_path)
         except Exception as e:
             raise RawFileException(f'Raw file import failed. {e}')
+        
+        # determine if import generated an error without raising an exception
+        if self.file_error.has_error:
+            raise RawFileException(self.file_error.error_message)
 
     # properties
     
@@ -105,7 +110,10 @@ class RawFileAccess(NetWrapperBase):
         "LastSpectrum")
         """
         if self._run_header is None:
-            self._run_header = RunHeader._get_wrapper_(self._get_wrapped_object_().RunHeader)
+            try:
+                self._run_header = RunHeader._get_wrapper_(self._get_wrapped_object_().RunHeader)
+            except ThermoFisher.CommonCore.Data.Business.NoSelectedDeviceException:
+                raise NoSelectedDeviceException()
         return self._run_header
 
     @property
@@ -113,7 +121,10 @@ class RawFileAccess(NetWrapperBase):
         """
         Information about the file stream
         """
-        return WrappedRunHeader._get_wrapper_(self._get_wrapped_object_().RunHeaderEx)
+        try:
+            return WrappedRunHeader._get_wrapper_(self._get_wrapped_object_().RunHeaderEx)
+        except ThermoFisher.CommonCore.Data.Business.NoSelectedDeviceException:
+                raise NoSelectedDeviceException()
 
     @property
     def instrument_methods_count(self) -> int:
@@ -150,7 +161,7 @@ class RawFileAccess(NetWrapperBase):
         """
         Gets the date when this data was created.
         """
-        return self._get_wrapped_object_().CreationDate
+        return datetime_net_to_py(self._get_wrapped_object_().CreationDate)
 
     @property
     def selected_instrument(self) -> InstrumentSelection:
@@ -253,7 +264,10 @@ class RawFileAccess(NetWrapperBase):
         advance of collecting data (based on the MS method). This does not analyze any
         scan data.
         """
-        return ScanEvents._get_wrapper_(self._get_wrapped_object_().ScanEvents)
+        try:
+            return ScanEvents._get_wrapper_(self._get_wrapped_object_().ScanEvents)
+        except ThermoFisher.CommonCore.Data.Business.NoSelectedMsDeviceException as e:
+                raise NoSelectedMsDeviceException(e.Message)
     
     @property
     def status_log_plottable_data(self) -> List[Tuple[str, int]]:
@@ -263,8 +277,11 @@ class RawFileAccess(NetWrapperBase):
         array returned by GetStatusLogHeaderInformation) Labels names are returned by
         "Key" and the index into the log record is "Value".
         """
-        kv_list = self._get_wrapped_object_().StatusLogPlottableData
-        return tuple((kv.Key, kv.Value) for kv in kv_list)        
+        try:
+            kv_list = self._get_wrapped_object_().StatusLogPlottableData
+            return tuple((kv.Key, kv.Value) for kv in kv_list)
+        except ThermoFisher.CommonCore.Data.Business.NoSelectedDeviceException:
+                raise NoSelectedDeviceException()
     
     def get_scan_events(self, first_scan_number: int, last_scan_number: int) -> List[ScanEvent]:
         """
