@@ -1,0 +1,55 @@
+{
+    "file_header": {
+        "creation_date": {
+            "type": "datetime",
+            "value": "2018-09-26 09:17:02.732000"
+        },
+        "file_description": "",
+        "file_type": {
+            "type": "FileType",
+            "value": 8
+        },
+        "modified_date": {
+            "type": "datetime",
+            "value": "2018-09-26 09:17:02.732000"
+        },
+        "number_of_times_calibrated": 0,
+        "number_of_times_modified": 1,
+        "revision": 66,
+        "who_created_id": "SYSTEM",
+        "who_created_logon": "SYSTEM",
+        "who_modified_id": "SYSTEM",
+        "who_modified_logon": "SYSTEM"
+    },
+    "sample_information": {
+        "barcode": "",
+        "barcode_status": {
+            "type": "BarcodeStatusType",
+            "value": 0
+        },
+        "calibration_file": "",
+        "calibration_level": "",
+        "comment": "",
+        "dilution_factor": 0.0,
+        "injection_volume": 0.0,
+        "instrument_method_file": "",
+        "istd_amount": 0.0,
+        "max_user_text_column_count": 20,
+        "path": "D:\\ProteomicsData",
+        "processing_method_file": "",
+        "raw_file_name": "Angiotensin_325-CID.raw",
+        "row_number": 1,
+        "sample_id": "",
+        "sample_name": "Angiotensin",
+        "sample_type": {
+            "type": "SampleType",
+            "value": 0
+        },
+        "sample_volume": 0.0,
+        "sample_weight": 0.0,
+        "user_text": [
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
+        ],
+        "vial": ""
+    }
+}

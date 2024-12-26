@@ -3,7 +3,8 @@ from typing import List
 from fisher_py.net_wrapping import ThermoFisher
 from fisher_py.data import CommonCoreDataObject
 from fisher_py.data.business import SampleType, BarcodeStatusType
-from fisher_py.utils import to_net_list
+from fisher_py.net_wrapping.wrapped_net_array import WrappedNetArray
+from fisher_py.utils import to_net_array, to_net_list
 
 
 class SampleInformation(CommonCoreDataObject):
@@ -16,6 +17,7 @@ class SampleInformation(CommonCoreDataObject):
     def __init__(self):
         super().__init__()
         self._wrapped_object = self._wrapped_type()
+        self._user_text = None
 
     max_user_text_column_count = 20
 
@@ -311,7 +313,9 @@ class SampleInformation(CommonCoreDataObject):
         """
         Gets or sets the collection of user text.
         """
-        return self._get_wrapped_object_().UserText
+        if self._user_text is None:
+            self._user_text = WrappedNetArray[str](self._get_wrapped_object_().UserText)        
+        return self._user_text
 
     @user_text.setter
     def user_text(self, value: List[str]):
@@ -319,7 +323,7 @@ class SampleInformation(CommonCoreDataObject):
         Gets or sets the collection of user text.
         """
         assert type(value) is list
-        value = to_net_list(value, str)
+        value = to_net_array(value, str)
         self._get_wrapped_object_().UserText = value
 
     def deep_copy(self) -> SampleInformation:

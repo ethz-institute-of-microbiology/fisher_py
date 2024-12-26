@@ -64,8 +64,8 @@ def assert_attribute(actual, expected):
             for attribute_name, attribute_value in expected.items():
                 assert hasattr(actual, attribute_name), f'Expected attribute "{attribute_name}"'
                 assert_attribute(getattr(actual, attribute_name), attribute_value)
-    elif type(expected) is list:
-        assert type(actual) is list, 'Expected value to be list'
+    elif isinstance(expected, list):
+        assert isinstance(actual, list), 'Expected value to be list'
         assert len(actual) == len(expected), f'Expected list value to have length {len(expected)}'
 
         for expected_item, actual_item in zip(expected, actual):
@@ -136,5 +136,6 @@ def capture_attribute_as_dict(access, path: str):
 
 def capture_attribute(access, path: str):
     """Capture object attribute and output to console"""
-    print(json.dumps(capture_attribute_as_dict(access, path), indent=4))
+    capture = capture_attribute_as_dict(access, path)
+    print(json.dumps(capture, indent=4))
     
