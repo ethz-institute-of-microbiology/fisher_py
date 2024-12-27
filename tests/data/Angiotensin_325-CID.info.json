@@ -51,5 +51,47 @@
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
         ],
         "vial": ""
+    },
+    "run_header": {
+        "end_time": 0.031483095733333334,
+        "expected_runtime": 0.0,
+        "first_spectrum": 1,
+        "high_mass": 2000.0,
+        "last_spectrum": 10,
+        "low_mass": 150.0,
+        "mass_resolution": 0.5,
+        "max_integrated_intensity": 46128300.0,
+        "max_intensity": 0,
+        "start_time": 0.00213759065,
+        "tolerance_unit": {
+            "type": "ToleranceUnits",
+            "value": 2
+        }
+    },
+    "run_header_ex": {
+        "comment_1": "",
+        "comment_2": "",
+        "end_time": 0.031483095733333334,
+        "error_log_count": 0,
+        "expected_run_time": 0.0,
+        "filter_mass_precision": 4,
+        "first_spectrum": 1,
+        "high_mass": 2000.0,
+        "in_acquisition": 0,
+        "last_spectrum": 10,
+        "low_mass": 150.0,
+        "mass_resolution": 0.5,
+        "max_integrated_intensity": 46128300.0,
+        "max_intensity": 0.0,
+        "spectra_count": 10,
+        "start_time": 0.00213759065,
+        "status_log_count": 1,
+        "tolerance_unit": {
+            "type": "ToleranceUnits",
+            "value": 2
+        },
+        "trailer_extra_count": 10,
+        "trailer_scan_event_count": 10,
+        "tune_data_count": 1
     }
 }

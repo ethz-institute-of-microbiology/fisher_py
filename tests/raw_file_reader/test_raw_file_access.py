@@ -1,4 +1,5 @@
 import pytest
+from fisher_py.data.device import Device
 from fisher_py.exceptions import RawFileException
 from fisher_py.exceptions.raw_file_exception import NoSelectedDeviceException, NoSelectedMsDeviceException
 from fisher_py.raw_file_reader import RawFileAccess
@@ -38,9 +39,17 @@ def test_attribute_available_without_instrument_selection_is_as_expected(attribu
     access = RawFileAccess(path_for(REFERENCE_RAW_FILE))
     assert_attributes(access, attribute)
 
-def test_debug():
-    from tests import capture_attribute
+def test_device_selection_works():
     access = RawFileAccess(path_for(REFERENCE_RAW_FILE))
-    capture_attribute(access, 'sample_information')
+    assert access.selected_instrument.device_type == Device.none
 
+    access.select_instrument(Device.MS, 1)
+    assert access.selected_instrument.device_type == Device.MS
+    assert access.selected_instrument.instrument_index == 1
+
+@pytest.mark.parametrize('attribute', ['run_header', 'run_header_ex'])
+def test_instrument_dependent_attribute_matches_expected_data(attribute: str):
+    access = RawFileAccess(path_for(REFERENCE_RAW_FILE))
+    access.select_instrument(Device.MS, 1)
+    assert_attributes(access, attribute)
     

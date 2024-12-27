@@ -169,9 +169,8 @@ class RawFileAccess(NetWrapperBase):
         Gets the instrument as last set by a call to ThermoFisher.CommonCore.Data.Interfaces.IRawData.SelectInstrument(ThermoFisher.CommonCore.Data.Business.Device,System.Int32).
         If this has never been set, returns null.
         """
-        if self._instrument_selection is None:
-            selected_instrument = self._get_wrapped_object_().SelectedInstrument
-            self._instrument_selection = InstrumentSelection(selected_instrument.InstrumentIndex, Device(selected_instrument.DeviceType))
+        selected_instrument = self._get_wrapped_object_().SelectedInstrument
+        self._instrument_selection = InstrumentSelection(selected_instrument.InstrumentIndex, Device(selected_instrument.DeviceType))
         return self._instrument_selection
 
     @property
