@@ -1,6 +1,15 @@
+import pythonnet
+
+# Load dotnet before clr import. See https://pythonnet.github.io/pythonnet/python.html#loading-a-runtime
+try:
+  pythonnet.load()  # Try default (i.e. 'mono' or PYTHONNET_RUNTIME)
+except:
+  pythonnet.load('coreclr')  # Fallback on coreclr
+
 import clr
 import os
 from fisher_py.net_wrapping.net_wrapper_base import NetWrapperBase
+from System import Environment
 
 # codecs for implicit enum conversion
 import Python.Runtime
@@ -10,7 +19,16 @@ Python.Runtime.PyObjectConversions.RegisterDecoder(Python.Runtime.Codecs.EnumPyI
 
 
 # access .net standard dlls
-dll_path = os.path.join(os.path.split(__file__)[0], '..', 'dll')
+dotnet_version = Environment.Version.get_Major()
+dll_base_path = os.path.join(os.path.split(__file__)[0], '..', 'dll')
+
+if dotnet_version >= 8:
+  dll_path = os.path.join(dll_base_path, 'net8')
+elif dotnet_version >= 5:
+  dll_path = os.path.join(dll_base_path, 'net5')
+else:
+  dll_path = os.path.join(dll_base_path, 'net4')
+
 clr.AddReference('System')
 clr.AddReference('System.Core')
 clr.AddReference('System.Data')
