@@ -1,0 +1,3 @@
+[submodule "libs/thermofisherlsms_RawFileReader"]
+	path = libs/thermofisherlsms_RawFileReader
+	url = https://github.com/thermofisherlsms/RawFileReader.git
