@@ -3,7 +3,7 @@ from datetime import datetime
 import clr
 
 clr.AddReference('System')
-from System import DateTime, Double
+from System import DateTime, Double, Array
 import System.Collections.Generic as generic
 
 def is_number(arg: Any) -> bool:
@@ -31,4 +31,24 @@ def to_net_list(py_list: List[Any], t) -> Any:
     if type(t) is float:
         t = Double
 
-    return generic.List[t](py_list)
+    # return generic.List[t](py_list)
+    net_list = generic.List[t]()
+    for item in py_list:
+        net_list.Add(item)
+    return net_list
+
+def to_net_array(py_list: list, t) -> Any:
+    """
+    Convert to .NET array
+    """
+    if type(t) is float:
+        t = Double
+
+    net_array = Array[t](len(py_list))
+    for i, item in enumerate(py_list):
+        net_array[i] = item
+    return net_array
+
+
+def to_py_list(net_list) -> list:
+    return [i for i in net_list]

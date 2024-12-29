@@ -50,3 +50,5 @@ fisher_py (Copyright 2021 ethz-institute-of-microbiology) is licensed under the 
 RawFileReader reading tool. Copyright © 2016 by Thermo Fisher Scientific, Inc. All rights reserved. See [RawFileReaderLicense.md](https://github.com/ethz-institute-of-microbiology/fisher_py/blob/main/RawFileReaderLicense.md) for licensing information. 
 Note: anyone recieving RawFileReader as part of a larger software distribution (in the current context, as part of fisher_py) is considered an "end user" under 
 section 3.3 of the RawFileReader License, and is not granted rights to redistribute RawFileReader.
+
+Some of the test data used is taken from the [Thermo-Raw-File-Reader](https://github.com/PNNL-Comp-Mass-Spec/Thermo-Raw-File-Reader) repository maintained by [Pacific Northwest National Laboratory](https://github.com/PNNL-Comp-Mass-Spec) and is licensed under the [2-Clause BSD License](https://opensource.org/licenses/BSD-2-Clause).
