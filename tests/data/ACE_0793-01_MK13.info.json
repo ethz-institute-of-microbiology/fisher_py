@@ -1,0 +1,37 @@
+{
+    "file_header": {
+        "creation_date": { "type": "datetime", "value": "2023-07-06 02:32:30.798000" },
+        "file_description": "",
+        "file_type": { "type": "FileType", "value": 8 },
+        "modified_date": { "type": "datetime", "value": "2023-07-06 02:29:59.084000" },
+        "number_of_times_calibrated": 0,
+        "number_of_times_modified": 2,
+        "revision": 66,
+        "who_created_id": "MestreNova",
+        "who_created_logon": "Xcalibur_System",
+        "who_modified_id": "Xcalibur_System",
+        "who_modified_logon": "Xcalibur_System"
+    },
+    "sample_information": {
+        "barcode": "",
+        "barcode_status": { "type": "BarcodeStatusType", "value": 0 },
+        "calibration_file": "",
+        "calibration_level": "",
+        "comment": "",
+        "dilution_factor": 1.0,
+        "injection_volume": 0.0,
+        "instrument_method_file": "C:\\Xcalibur\\methods\\Evosep_One_21min_v01.meth",
+        "istd_amount": 0.0,
+        "max_user_text_column_count": 20,
+        "path": "D:\\Xcalibur\\Data\\ACE_0793\\ACE_0793-01_2023_07_05_Lumos",
+        "processing_method_file": "",
+        "raw_file_name": "D:\\Xcalibur\\Data\\ACE_0793\\ACE_0793-01_2023_07_05_Lumos\\ACE_0793-01_MK13.raw",
+        "row_number": 0,
+        "sample_id": "",
+        "sample_name": "ACE_0793-01_MK13",
+        "sample_type": { "type": "SampleType", "value": 0 },
+        "sample_volume": 0.0,
+        "sample_weight": 0.0,
+        "vial": "EvoSlot 1:13"
+    }
+}

@@ -14,7 +14,7 @@ fishery_py shoud work on any modern desktop operating system (Linux, Windows, Ma
 - Mac OS: Not tested
 
 The module relies on the RawFileReader DLLs (Dynamic-Linked-Libraries) to be loaded at runtime (using [pythonnet](https://github.com/pythonnet/pythonnet)). Since Microsoft introduced .NET Standard it is possible to load DLLs compiled with this framework to be loaded on non-Windows systems (such as Mac OS and Linux). However, systems other than Windows may require additional setup steps in order for fisher_py to work.
-If you have trouble problems installing fisher_py it is probably because of pythonnet not being able to compile. To resolve this the usualy path is to install mono (https://www.mono-project.com/). There are several guides online to do this but one that was tested can be found [here](https://linuxize.com/post/how-to-install-mono-on-ubuntu-20-04/).
+If you have trouble problems installing fisher_py it is probably because of pythonnet not being able to compile. To resolve this the usualy path is to install the [.Net 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0).
 
 ## Examples
 The following example demonstrates how to extract and plot data from a raw-file:
@@ -50,3 +50,5 @@ fisher_py (Copyright 2021 ethz-institute-of-microbiology) is licensed under the 
 RawFileReader reading tool. Copyright © 2016 by Thermo Fisher Scientific, Inc. All rights reserved. See [RawFileReaderLicense.md](https://github.com/ethz-institute-of-microbiology/fisher_py/blob/main/RawFileReaderLicense.md) for licensing information. 
 Note: anyone recieving RawFileReader as part of a larger software distribution (in the current context, as part of fisher_py) is considered an "end user" under 
 section 3.3 of the RawFileReader License, and is not granted rights to redistribute RawFileReader.
+
+Some of the test data used is taken from the [Thermo-Raw-File-Reader](https://github.com/PNNL-Comp-Mass-Spec/Thermo-Raw-File-Reader) repository maintained by [Pacific Northwest National Laboratory](https://github.com/PNNL-Comp-Mass-Spec) and is licensed under the [2-Clause BSD License](https://opensource.org/licenses/BSD-2-Clause).
