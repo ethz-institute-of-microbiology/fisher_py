@@ -55,7 +55,7 @@ import ThermoFisher.CommonCore.MassPrecisionEstimator as thermo_fisher_mass_prec
 import ThermoFisher.CommonCore.RawFileReader as thermo_fisher_raw_file_reader
 import ThermoFisher.CommonCore.MassPrecisionEstimator as thermo_fisher_mass_precision_estimator
 
-# expose .net standard libraries in a friendly manner
+# expose .net libraries in a friendly manner
 class _Data:
 
     Business = thermo_fisher_data_business
